@@ -9,6 +9,11 @@ import static LinesAndShapes.Vertex.*;
 public class Graph{
 
     private Bag<Vertex>[] adj;
+
+    public Vertex[] getVertices() {
+        return vertices;
+    }
+
     private Vertex[] vertices;
 
     public Graph (Vertex[] vertices) {
@@ -32,7 +37,7 @@ public class Graph{
     }
 
     public Iterable<Vertex> adj(Vertex v) {
-        return adj[Integer.parseInt(v.getNumber())];
+        return adj[v.getNumber()];
     }
 
     private void drawVerticis(Graphics g) {
@@ -45,15 +50,26 @@ public class Graph{
 
     public void paint(Graphics g) {
         drawVerticis(g);
-        new Edge(vertices[0], vertices[1]).draw(g,RAD/2, RAD, RAD/2, 0);
-        new Edge(vertices[1], vertices[2]).draw(g, RAD, RAD/2, 0, RAD/2);
+        new Edge(vertices[0], vertices[1]).withCoordinates(RAD/2, RAD, RAD/2, 0).draw(g);
+        new Edge(vertices[1], vertices[2]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
 
-        new Edge(vertices[2], vertices[3]).draw(g, RAD/2, 0, RAD/2, RAD);
-        new Edge(vertices[0], vertices[3]).draw(g, RAD, RAD/2, 0, RAD/2);
-        new Edge(vertices[0], vertices[6]).draw(g, RAD, RAD/2, 0, RAD/2);
-        new Edge(vertices[0], vertices[5]).draw(g, RAD, RAD/2, 0, RAD/2);
-        new Edge(vertices[1], vertices[4]).draw(g, RAD, RAD/2, 0, RAD/2);
+        new Edge(vertices[2], vertices[3]).withCoordinates(RAD/2, 0, RAD/2, RAD).draw(g);
+        new Edge(vertices[0], vertices[3]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
+        new Edge(vertices[0], vertices[6]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
+        new Edge(vertices[0], vertices[5]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
+        new Edge(vertices[1], vertices[4]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
 
-        new Edge(vertices[4], vertices[2]).draw(g, RAD, RAD/2, 0, RAD/2);
+        new Edge(vertices[4], vertices[2]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
+    }
+
+    public Vertex getVertex(int v) {
+        for (Vertex vertex : vertices) {
+            if(vertex.getNumber() == v) return vertex;
+        }
+        return null;
+    }
+
+    public void drawEdge(int currentVertex, int v) {
+
     }
 }

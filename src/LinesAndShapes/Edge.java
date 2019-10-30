@@ -5,6 +5,10 @@ import java.awt.*;
 public class Edge {
     private Vertex v1;
     private Vertex v2;
+    private int x1;
+    private int y1;
+    private int x2;
+    private int y2;
 
     public Edge(Vertex v1, Vertex v2) {
         this.v1 = v1;
@@ -25,5 +29,21 @@ public class Edge {
         g.setColor(Color.decode(hexColor));
         //draw a line (starting x,y; ending x,y)
         g.drawLine(x1, y1, x2, y2);
+    }
+
+    public Edge withCoordinates(int x1, int y1, int x2, int y2) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+        return this;
+    }
+
+    public void draw(Graphics g) {
+        int x1 = Double.valueOf(v1.getX() + this.x1).intValue();
+        int y1 = Double.valueOf(v1.getY() + this.y1).intValue();
+        int x2 = Double.valueOf(v2.getX() + this.x2).intValue();
+        int y2 = Double.valueOf(v2.getY() + this.y2).intValue();
+        draw(g,x1, y1, x2, y2);
     }
 }

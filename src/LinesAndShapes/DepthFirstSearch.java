@@ -2,6 +2,7 @@ package LinesAndShapes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Stack;
 
 public class DepthFirstSearch extends JPanel {
 
@@ -23,25 +24,41 @@ public class DepthFirstSearch extends JPanel {
         super.paintComponent(g);
         graph.paint(getGraphics());
         dfs(s);
+        drawPath(pathTo(graph.getVertices()[4]));
     }
 
-
-
+    private void drawPath(Iterable<Integer> path) {
+        Graphics g = getGraphics();
+        int currentVertex = -1;
+        for (int v : path) {
+            if (currentVertex != -1) {
+                graph.drawEdge(currentVertex, v);
+            } else {
+                currentVertex = v;
+            }
+            graph.getVertex(v).fillVertex(g, Color.RED);
+            sleep(1000);
+        }
+    }
 
     private void dfs(Vertex src) {
 
-        marked[Integer.parseInt(src.getNumber())] = true;
+        marked[src.getNumber()] = true;
         onNewVertex(src);
+        sleep(1000);
+        for (Vertex v : graph.adj(src)) {
+            if (!marked[v.getNumber()]) {
+                dfs(v);
+                edgeTo[v.getNumber()] = src;
+            }
+        }
+    }
+
+    private void sleep(int mls) {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(mls);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        for (Vertex v : graph.adj(src)) {
-            if (!marked[Integer.parseInt(v.getNumber())]) {
-                dfs(v);
-                edgeTo[Integer.parseInt(v.getNumber())] = src;
-            }
         }
     }
 
@@ -50,45 +67,23 @@ public class DepthFirstSearch extends JPanel {
         src.fillVertex(g);
     }
 
-
-
-
-
-
-
-
-
-
-    boolean hasPathTo(int v) {
-        return marked[v];
+    boolean hasPathTo(Vertex v) {
+        return marked[v.getNumber()];
     }
 
+    Iterable<Integer> pathTo(Vertex v) {
 
+        if (!hasPathTo(v)) return null;
 
+        Stack<Integer> path = new Stack<>();
 
+        for(int p = v.getNumber(); p != s.getNumber(); p = edgeTo[p].getNumber()) {
+            path.push(p);
+        }
+        path.push(s.getNumber());
 
-
-
-
-
-
-
-
-
-
-//    Iterable<Integer> pathTo(int v) {
-//
-//        if (!hasPathTo(v)) return null;
-//
-//        Stack<Integer> path = new Stack<>();
-//
-//        for(int p = v; p != s; p = edgeTo[p]) {
-//            path.push(p);
-//        }
-//        path.push(s);
-//
-//        return path;
-//    }
+        return path;
+    }
 
 }
 

@@ -26,13 +26,13 @@ public class SwingPaintDemo3 {
         double startY = 50;
 
         Vertex[] vertices = new Vertex[7];
-        vertices[0] = new Vertex(startX,startY, 50, "0");
-        vertices[1] = new Vertex(startX,startY + 500, 50, "5");
-        vertices[2] = new Vertex(startX + 400,startY + 400, 50, "4");
-        vertices[3] = new Vertex(startX + 500,startY + 100, 50, "6");
-        vertices[4] = new Vertex(startX + 200,startY + 350, 50, "3");
-        vertices[5] = new Vertex(startX + 150,startY + 100, 50, "1");
-        vertices[6] = new Vertex(startX + 325,startY + 100, 50, "2");
+        vertices[0] = new Vertex(startX,startY, 50, 0);
+        vertices[1] = new Vertex(startX,startY + 500, 50, 5);
+        vertices[2] = new Vertex(startX + 400,startY + 400, 50, 4);
+        vertices[3] = new Vertex(startX + 500,startY + 100, 50, 6);
+        vertices[4] = new Vertex(startX + 200,startY + 350, 50, 3);
+        vertices[5] = new Vertex(startX + 150,startY + 100, 50, 1);
+        vertices[6] = new Vertex(startX + 325,startY + 100, 50, 2);
 
         Graph graph = new Graph(vertices);
         graph.addEdge(vertices[0], vertices[1]);
