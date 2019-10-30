@@ -63,8 +63,19 @@ public class Graph{
         return null;
     }
 
-    public void drawEdge(int currentVertex, int v) {
+    public void drawEdge(int currentVertex, int v, Graphics g) {
+        Edge edge = getEdge(currentVertex, v);
+        if (edge !=null) {
+            edge.draw(g, Color.RED);
+        }
+    }
 
+    private Edge getEdge(int v1, int v2) {
+        if (v1 == v2) return null;
+        for (Edge edge : edges) {
+            if (edge.contains(v1) && edge.contains(v2)) return edge;
+        }
+        return null;
     }
 
     public void addEdge(Edge edge) {

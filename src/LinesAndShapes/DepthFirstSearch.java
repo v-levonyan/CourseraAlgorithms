@@ -31,9 +31,10 @@ public class DepthFirstSearch extends JPanel {
         Graphics g = getGraphics();
         int currentVertex = -1;
         for (int v : path) {
-            if (currentVertex != -1) {
-                graph.drawEdge(currentVertex, v);
+            if (currentVertex == -1) {
+                currentVertex = v;
             } else {
+                graph.drawEdge(currentVertex, v, g);
                 currentVertex = v;
             }
             graph.getVertex(v).fillVertex(g, Color.RED);
@@ -44,8 +45,8 @@ public class DepthFirstSearch extends JPanel {
     private void dfs(Vertex src) {
 
         marked[src.getNumber()] = true;
-        onNewVertex(src);
-        sleep(1000);
+//        onNewVertex(src);
+//        sleep(1000);
         for (Vertex v : graph.adj(src)) {
             if (!marked[v.getNumber()]) {
                 dfs(v);

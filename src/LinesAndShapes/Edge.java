@@ -24,10 +24,6 @@ public class Edge {
     }
 
     private void draw(Graphics g, int x1, int y1, int x2, int y2) {
-        String hexColor = new String("0x45e5B");
-        //custom color
-        g.setColor(Color.decode(hexColor));
-        //draw a line (starting x,y; ending x,y)
         g.drawLine(x1, y1, x2, y2);
     }
 
@@ -53,5 +49,18 @@ public class Edge {
         int x2 = Double.valueOf(v2.getX() + this.x2).intValue();
         int y2 = Double.valueOf(v2.getY() + this.y2).intValue();
         draw(g,x1, y1, x2, y2);
+    }
+
+    public void draw(Graphics g, Color color) {
+        int x1 = Double.valueOf(v1.getX() + this.x1).intValue();
+        int y1 = Double.valueOf(v1.getY() + this.y1).intValue();
+        int x2 = Double.valueOf(v2.getX() + this.x2).intValue();
+        int y2 = Double.valueOf(v2.getY() + this.y2).intValue();
+        g.setColor(color);
+        draw(g,x1, y1, x2, y2);
+    }
+
+    public boolean contains(int v) {
+        return this.v1.getNumber() == v || this.v2.getNumber() == v;
     }
 }
