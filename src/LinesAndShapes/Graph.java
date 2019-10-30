@@ -3,8 +3,8 @@ package LinesAndShapes;
 import DataStructures.Bag;
 
 import java.awt.*;
-
-import static LinesAndShapes.Vertex.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Graph{
 
@@ -15,11 +15,13 @@ public class Graph{
     }
 
     private Vertex[] vertices;
+    private List<Edge> edges;
 
     public Graph (Vertex[] vertices) {
         this.vertices = vertices;
 
         adj =  new Bag[vertices.length];
+        edges = new ArrayList<>();
 
         for (int v = 0; v < vertices.length; v++) {
             adj[v] = new Bag<>();
@@ -50,16 +52,13 @@ public class Graph{
 
     public void paint(Graphics g) {
         drawVerticis(g);
-        new Edge(vertices[0], vertices[1]).withCoordinates(RAD/2, RAD, RAD/2, 0).draw(g);
-        new Edge(vertices[1], vertices[2]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
+        drawEdges(g);
+    }
 
-        new Edge(vertices[2], vertices[3]).withCoordinates(RAD/2, 0, RAD/2, RAD).draw(g);
-        new Edge(vertices[0], vertices[3]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
-        new Edge(vertices[0], vertices[6]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
-        new Edge(vertices[0], vertices[5]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
-        new Edge(vertices[1], vertices[4]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
-
-        new Edge(vertices[4], vertices[2]).withCoordinates(RAD, RAD/2, 0, RAD/2).draw(g);
+    private void drawEdges(Graphics g) {
+        for (Edge edge : edges) {
+            edge.draw(g);
+        }
     }
 
     public Vertex getVertex(int v) {
@@ -71,5 +70,9 @@ public class Graph{
 
     public void drawEdge(int currentVertex, int v) {
 
+    }
+
+    public void addEdge(Edge edge) {
+        edges.add(edge);
     }
 }
