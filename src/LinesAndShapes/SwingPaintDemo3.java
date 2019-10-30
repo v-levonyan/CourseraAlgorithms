@@ -40,25 +40,12 @@ public class SwingPaintDemo3 {
 
         graph.addEdge(new Edge(vertices[0], vertices[1]).withCoordinates(RAD/2, RAD, RAD/2, 0));
         graph.addEdge(new Edge(vertices[1], vertices[2]).withCoordinates(RAD, RAD/2, 0, RAD/2));
-
         graph.addEdge(new Edge(vertices[2], vertices[3]).withCoordinates(RAD/2, 0, RAD/2, RAD));
         graph.addEdge(new Edge(vertices[0], vertices[3]).withCoordinates(RAD, RAD/2, 0, RAD/2));
         graph.addEdge(new Edge(vertices[0], vertices[6]).withCoordinates(RAD, RAD/2, 0, RAD/2));
         graph.addEdge(new Edge(vertices[0], vertices[5]).withCoordinates(RAD, RAD/2, 0, RAD/2));
         graph.addEdge(new Edge(vertices[1], vertices[4]).withCoordinates(RAD, RAD/2, 0, RAD/2));
-
         graph.addEdge(new Edge(vertices[4], vertices[2]).withCoordinates(RAD, RAD/2, 0, RAD/2));
-
-        graph.addEdge(vertices[0], vertices[1]);
-        graph.addEdge(vertices[0], vertices[3]);
-        graph.addEdge(vertices[0], vertices[5]);
-        graph.addEdge(vertices[0], vertices[6]);
-        graph.addEdge(vertices[2], vertices[3]);
-        graph.addEdge(vertices[2], vertices[4]);
-        graph.addEdge(vertices[2], vertices[1]);
-        graph.addEdge(vertices[1], vertices[4]);
-
-
 
         f.add(new DepthFirstSearch(graph, vertices[0]));
     }

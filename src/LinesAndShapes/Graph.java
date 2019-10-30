@@ -33,11 +33,6 @@ public class Graph{
     }
 
 
-    public void addEdge(Vertex v, Vertex w) {
-        adj[Integer.valueOf(v.getNumber())].add(w);
-        adj[Integer.valueOf(w.getNumber())].add(v);
-    }
-
     public Iterable<Vertex> adj(Vertex v) {
         return adj[v.getNumber()];
     }
@@ -73,6 +68,9 @@ public class Graph{
     }
 
     public void addEdge(Edge edge) {
+        adj[edge.getV1().getNumber()].add(edge.getV2());
+        adj[edge.getV2().getNumber()].add(edge.getV1());
+
         edges.add(edge);
     }
 }
