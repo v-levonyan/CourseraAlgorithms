@@ -23,7 +23,7 @@ public class DepthFirstSearch extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         graph.paint(getGraphics());
-        dfs(s);
+        dfsNonRecursive(s);
         drawPath(pathTo(graph.getVertices()[4]));
     }
 
@@ -45,13 +45,35 @@ public class DepthFirstSearch extends JPanel {
     private void dfs(Vertex src) {
 
         marked[src.getNumber()] = true;
-//        onNewVertex(src);
-//        sleep(1000);
+        onNewVertex(src);
+        sleep(2000);
         for (Vertex v : graph.adj(src)) {
             if (!marked[v.getNumber()]) {
                 dfs(v);
                 edgeTo[v.getNumber()] = src;
             }
+        }
+    }
+
+    //TODO: wrong solution
+    private void dfsNonRecursive(Vertex src) {
+        marked[src.getNumber()] = true;
+
+        Stack<Vertex> paths = new Stack<>();
+
+        paths.add(src);
+        while (!paths.isEmpty()) {
+            Vertex current = paths.pop();
+            for (Vertex v : graph.adj(src)) {
+                if (!marked[v.getNumber()]) {
+                    paths.add(v);
+                    marked[v.getNumber()] = true;
+                    onNewVertex(src);
+                    sleep(2000);
+                    edgeTo[v.getNumber()] = current;
+                }
+            }
+
         }
     }
 
