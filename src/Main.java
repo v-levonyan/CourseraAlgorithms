@@ -1,14 +1,22 @@
+import DataStructures.DiGraph;
+import DataStructures.Graph;
+
+import algorithms.DirectedCycle;
+
+import java.util.Stack;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        Graph G = createGraph(13);
-        int s = 2;
+        DiGraph G = createDiGraph(8);
 
-        DepthFirstSearch depthFirstSearch = new DepthFirstSearch(G, s);
+        DirectedCycle directedCycle = new DirectedCycle(G);
 
-        for (int p : depthFirstSearch.pathTo(3)) {
-            System.out.println(p);
+        System.out.println("Has cycle: " + directedCycle.hasCycle());
+
+        for (Stack<Integer> cycle : directedCycle.cycles()) {
+            System.out.println("cycle: " + cycle);
         }
 
     }
@@ -23,13 +31,27 @@ public class Main {
         graph.addEdge(5, 3);
         graph.addEdge(5, 4);
         graph.addEdge(6, 4);
+        graph.addEdge(3, 1);
 
-        graph.addEdge(7, 8);
-        graph.addEdge(9, 10);
-        graph.addEdge(9, 11);
-        graph.addEdge(9, 12);
-        graph.addEdge(11, 12);
+        return graph;
+    }
 
+    private static DiGraph createDiGraph(int v) {
+
+        DiGraph graph = new DiGraph(v);
+        graph.addEdge(0, 1);
+        graph.addEdge(1, 2);
+        graph.addEdge(1, 7);
+        graph.addEdge(2, 3);
+        graph.addEdge(2, 5);
+        graph.addEdge(3, 4);
+        graph.addEdge(4, 2);
+        graph.addEdge(4, 6);
+        graph.addEdge(6, 5);
+        graph.addEdge(7, 3);
+        graph.addEdge(3, 1);
+        graph.addEdge(4, 7);
+        graph.addEdge(7, 1);
 
         return graph;
     }

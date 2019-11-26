@@ -23,8 +23,8 @@ public class DepthFirstSearch extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         graph.paint(getGraphics());
-        dfsNonRecursive(s);
-        drawPath(pathTo(graph.getVertices()[4]));
+        dfs(s);
+//        drawPath(pathTo(graph.getVertices()[4]));
     }
 
     private void drawPath(Iterable<Integer> path) {
@@ -51,6 +51,7 @@ public class DepthFirstSearch extends JPanel {
             if (!marked[v.getNumber()]) {
                 dfs(v);
                 edgeTo[v.getNumber()] = src;
+                System.out.println(v.getNumber() + "-->" + src.getNumber());
             }
         }
     }
@@ -59,19 +60,20 @@ public class DepthFirstSearch extends JPanel {
     private void dfsNonRecursive(Vertex src) {
         marked[src.getNumber()] = true;
 
-        Stack<Vertex> paths = new Stack<>();
+        Stack<Vertex> stack = new Stack<>();
 
-        paths.add(src);
-        while (!paths.isEmpty()) {
-            Vertex current = paths.pop();
-            for (Vertex v : graph.adj(src)) {
+        stack.add(src);
+        while (!stack.isEmpty()) {
+            Vertex current = stack.pop();
+            for (Vertex v : graph.adj(current)) {
                 if (!marked[v.getNumber()]) {
-                    paths.add(v);
-                    marked[v.getNumber()] = true;
-                    onNewVertex(src);
-                    sleep(2000);
-                    edgeTo[v.getNumber()] = current;
+                    stack.add(v);
                 }
+            }
+            marked[current.getNumber()] = true;
+            if (stack.peek() != null) {
+                edgeTo[current.getNumber()] = stack.peek();
+                System.out.println(current.getNumber() + "-->" + stack.peek().getNumber());
             }
 
         }
