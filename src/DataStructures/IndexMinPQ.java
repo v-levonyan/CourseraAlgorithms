@@ -42,20 +42,63 @@ public class IndexMinPQ<Key extends Comparable<Key>> {
         return indexOfMin;
     }
 
-    private void swim(int n) {
-        while (n != 1) {
-            if (pq[n/2] > pq[n]) {
-                exch(n/2, n);
-                n = n/2;
-            }
+    private void swim(int k)
+    {
+        while (k > 1 && more(k/2, k)) {
+            exch(k/2, k);
+            k = k/2;
         }
     }
 
-    private void sink(int i) {
-
+    private void sink(int k)
+    {
+        while (2*k <= N)
+        {
+            int j = 2*k;
+            if (j < N && more(j, j+1)) j++;
+            if (!more(k, j)) break;
+            exch(k, j);
+            k = j;
+        }
     }
 
-    private void exch(int i, int i1) {
-        
+    private boolean less(int i, int j)
+    {
+        return keys[pq[i]].compareTo(keys[pq[j]]) < 0;
+    }
+
+    private boolean more(int i, int j)
+    {
+        return keys[pq[i]].compareTo(keys[pq[j]]) > 0;
+    }
+
+    private void exch(int i, int j)
+    {
+//        qp[pq[i]] = pq[qp[i]] = i
+
+        int t = pq[i];
+        pq[i] = pq[j];
+        pq[j] = t;
+
+        t = qp[pq[i]];
+        qp[pq[i]] = qp[pq[j]];
+        qp[pq[j]] = t;
+    }
+
+    public int minIndex() {
+        return pq[1];
+    }
+
+    public void change(int k, Key key) {
+        keys[k] = key;
+        swim(qp[k]);
+        sink(qp[k]);
+    }
+    public void delete(int k) {
+        exch(k, N--);
+        swim(qp[k]);
+        sink(qp[k]);
+        keys[pq[N+1]] = null;
+        qp[pq[N+1]] = -1;
     }
 }

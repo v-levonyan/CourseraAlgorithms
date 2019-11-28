@@ -16,9 +16,11 @@ public class EagerPrimMST implements MST{
 
     public EagerPrimMST(EdgeWeightedGraph graph) {
 
-        edgeTo = new Edge[graph.V() - 1];
+        edgeTo = new Edge[graph.V()];
         distTo = new double[graph.V()];
         marked = new boolean[graph.V()];
+
+        pq = new IndexMinPQ<>(graph.V());
 
         for (int v = 0; v < graph.V(); v++) {
             distTo[v] = Double.POSITIVE_INFINITY;

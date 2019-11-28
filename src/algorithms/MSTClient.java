@@ -12,7 +12,8 @@ public class MSTClient {
         BufferedReader in = new BufferedReader(new FileReader(new File(args[0])));
         EdgeWeightedGraph G;
         G = new EdgeWeightedGraph(in);
-        MST mst = new LazyPrimMST(G);
+//        MST mst = new LazyPrimMST(G);
+        MST mst = new EagerPrimMST(G);
         for (Edge e : mst.edges())
             System.out.println(e);
 
