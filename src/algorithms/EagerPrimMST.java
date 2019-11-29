@@ -4,8 +4,10 @@ import DataStructures.Edge;
 import DataStructures.EdgeWeightedGraph;
 import DataStructures.IndexMinPQ;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class EagerPrimMST implements MST{
 
@@ -55,15 +57,23 @@ public class EagerPrimMST implements MST{
 
     @Override
     public Iterable<Edge> edges() {
-        return Arrays.asList(edgeTo);
+        List<Edge> edges = new ArrayList<>();
+        for (Edge e : edgeTo) {
+            if (e != null) {
+                edges.add(e);
+            }
+        }
+        return edges;
     }
 
     @Override
     public double weight() {
-        int weight = 0;
+        double weight = 0.0;
 
-        for(double w : distTo) {
-            weight += w;
+        for(Edge e : edgeTo) {
+            if (e != null) {
+                weight += e.weight();
+            }
         }
         return weight;
     }
