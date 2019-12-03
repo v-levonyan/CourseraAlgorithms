@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EdgeWeightedGraph {
     private final int V;
@@ -59,7 +61,7 @@ public class EdgeWeightedGraph {
     }
 
     public Iterable<Edge> edges() {
-        Bag<Edge> edges = new Bag<>();
+        List<Edge> edges = new ArrayList<>();
 
         for (int v = 0; v < V; v++) {
             for (Edge e : adj(v)) {

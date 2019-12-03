@@ -13,7 +13,8 @@ public class MSTClient {
         EdgeWeightedGraph G;
         G = new EdgeWeightedGraph(in);
 //        MST mst = new LazyPrimMST(G);
-        MST mst = new EagerPrimMST(G);
+//        MST mst = new EagerPrimMST(G);
+        MST mst = new KruskalMST(G);
         for (Edge e : mst.edges())
             System.out.println(e);
 
