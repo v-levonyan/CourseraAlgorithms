@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.graphs;
 
 import DataStructures.DiGraph;
 

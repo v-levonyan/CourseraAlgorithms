@@ -1,12 +1,10 @@
-package algorithms;
+package algorithms.graphs;
 
 import DataStructures.Edge;
 import DataStructures.EdgeWeightedGraph;
 import DataStructures.IndexMinPQ;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class EagerPrimMST implements MST{

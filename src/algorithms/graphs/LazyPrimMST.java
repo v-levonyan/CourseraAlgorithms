@@ -1,6 +1,5 @@
-package algorithms;
+package algorithms.graphs;
 
-import DataStructures.Bag;
 import DataStructures.Edge;
 import DataStructures.EdgeWeightedGraph;
 

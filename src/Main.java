@@ -1,7 +1,7 @@
 import DataStructures.DiGraph;
 import DataStructures.Graph;
 
-import algorithms.DirectedCycle;
+import algorithms.graphs.DirectedCycle;
 
 import java.util.Stack;
 
